@@ -43,6 +43,15 @@ var gameOverText;
 var jumpPower = -500;
 var jumpPowerForText = 500;
 var jumPowerText;
+var gameWonText;
+var playerx;
+var playery;
+var pauseboxX;
+var pauseboxY;
+var pausestringX;
+var pausestringY;
+var pausebaloonX;
+var pausebaloonY;
 
 function preload() {
   this.load.spritesheet("dude", "assets/dude.png", { frameWidth: 32, frameHeight: 48 });
@@ -68,7 +77,6 @@ function loselive(box, platform) {
     jumPowerText.visible = false;
     game.scene.pause('default')
     
-    
   }
 
 }
@@ -84,8 +92,10 @@ function create() {
   platforms.create(400, 568, 'ground').setScale(2).refreshBody();
   scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#FFFFFF' });
   livesText = this.add.text(600, 16, 'lives: 3', { fontSize: '32px', fill: '#FFFFFF' });
-  gameOverText = this.add.text(180, 250, 'GAME OVER', {font: '80px bold', fill: '#FFFFFF'})
+  gameOverText = this.add.text(180, 250, 'GAME OVER', {font: '80px bold', fill: '#FF0000'})
   gameOverText.visible = false;
+  gameWonText = this.add.text(180, 250, 'GAME WON', {font: '80px bold', fill: '#FFD700'})
+  gameWonText.visible = false;
   jumPowerText = this.add.text(630, 300, 'jump power: 500%', {fontSize: '15px', fill: '#FFFFFF'})
   keys = this.input.keyboard.addKeys("W,A,S,D");
   spaceBar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -190,6 +200,15 @@ function resetBaloon(baloon) {
 
 }
 function baloonhit(baloon, laser) {
+  if(score == 150) {
+    box.disableBody(true, true);
+    string.disableBody(true, true);
+    baloon.disableBody(true, true);
+    gameWonText.visible = true;
+    jumPowerText.visible = false;
+    game.scene.pause('default')
+
+  }
   if(laser.active) {
     resetLaser(laser)
     numofbaloons -= 1
@@ -206,10 +225,15 @@ function baloonhit(baloon, laser) {
 }
 
 function pause() {
-  game.scene.pause("default")
+  game.scene.pause('default')
+
 }
 function resume() {
-  game.scene.resume("default")
+  game.scene.resume('default')
+  
+}
+function restartGame() {
+  game.scene.start('default')
 }
 
 function update(time, delta) {
