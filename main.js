@@ -65,6 +65,7 @@ function loselive(box, platform) {
     string.disableBody(true, true);
     baloon.disableBody(true, true);
     gameOverText.visible = true;
+    jumPowerText.visible = false;
     game.scene.pause('default')
     
     
@@ -156,17 +157,21 @@ function resetLaser(laser) {
   laser.disableBody(true, true);
 }
 
+function randomInt(min, max) { // min and max included 
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
 function resetBox(box) {
   box.disableBody(true, true);
   baloon.disableBody(true, true);
   string.disableBody(true, true);
   setTimeout(50000)
-  boxgravity += 10
+  boxgravity += 15
   box.body.setGravityY(boxgravity);
-  box.enableBody(true, 300, 0, true, true);
-  string.enableBody(true, 300, 0, true, true);
-  baloon.enableBody(true, 300, 0, true, true);
+  boxX = randomInt(15, 755)
+  box.enableBody(true, boxX, 0, true, true);
+  string.enableBody(true, boxX, 0, true, true);
+  baloon.enableBody(true, boxX, 0, true, true);
   numofbaloons = 1;
   
   
