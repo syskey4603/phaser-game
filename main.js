@@ -1,10 +1,8 @@
 var config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
     scale: {
         // Fit to window
-        mode: Phaser.Scale.FIT,
+        mode: Phaser.Scale.RESIZE,
         // Center vertically and horizontally
         autoCenter: Phaser.Scale.CENTER_BOTH
         },
@@ -95,8 +93,8 @@ var config = {
     resumeButton = this.add.text(500, 30, 'resume', {fill: '#0f0'});
     resumeButton.setInteractive();
     resumeButton.on('pointerdown', () => resume());
-    platforms = this.physics.add.staticGroup();
-    platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+    platforms = this.physics.add.sprite(window.screen.width/2, window.screen.height-120, 'ground')
+    platforms.displayWidth = window.screen.width
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#FFFFFF' });
     livesText = this.add.text(600, 16, 'lives: 3', { fontSize: '32px', fill: '#FFFFFF' });
     gameOverText = this.add.text(180, 250, 'GAME OVER', {font: '80px bold', fill: '#FF0000'})
@@ -119,7 +117,9 @@ var config = {
     baloon = this.physics.add.sprite(boxX, baloonY, 'baloon')
     box.body.setGravityY(boxgravity);
     player.setCollideWorldBounds(true);
-  
+    platforms.setCollideWorldBounds(true);
+    platforms.body.setDrag(500, 1000);
+    platforms.body.setAllowGravity(false);
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(box, platforms, loselive);
     this.physics.add.collider(box, player);
@@ -185,7 +185,7 @@ var config = {
     setTimeout(50000)
     boxgravity += 15
     box.body.setGravityY(boxgravity);
-    boxX = randomInt(15, 755)
+    boxX = randomInt(15, window.screen.width)
     box.enableBody(true, boxX, 0, true, true);
     string.enableBody(true, boxX, 0, true, true);
     baloon.enableBody(true, boxX, 0, true, true);
