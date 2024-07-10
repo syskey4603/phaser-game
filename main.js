@@ -93,7 +93,7 @@ var config = {
     resumeButton = this.add.text(500, 30, 'resume', {fill: '#0f0'});
     resumeButton.setInteractive();
     resumeButton.on('pointerdown', () => resume());
-    platforms = this.physics.add.sprite(window.screen.width/2, window.screen.height-200, 'ground')
+    platforms = this.physics.add.sprite(window.screen.width/2, window.screen.height-70, 'ground')
     platforms.displayWidth = window.screen.width
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#FFFFFF' });
     livesText = this.add.text(600, 16, 'lives: 3', { fontSize: '32px', fill: '#FFFFFF' });
