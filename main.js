@@ -1,11 +1,7 @@
 var config = {
     type: Phaser.AUTO,
-    scale: {
-        // Fit to window
-        mode: Phaser.Scale.RESIZE,
-        // Center vertically and horizontally
-        autoCenter: Phaser.Scale.CENTER_BOTH
-        },
+    width: window.innerWidth,
+    height: window.innerHeight,
     scene: {
         preload: preload,
         create: create,
@@ -87,16 +83,16 @@ var config = {
   }
   
   function create() {
-    pauseButton = this.add.text(400, 30, 'pause', { fill: '#0f0' });
+    pauseButton = this.add.text(900, 30, 'pause', { fill: '#0f0' });
     pauseButton.setInteractive();
     pauseButton.on('pointerdown', () => pause());
-    resumeButton = this.add.text(500, 30, 'resume', {fill: '#0f0'});
+    resumeButton = this.add.text(1000, 30, 'resume', {fill: '#0f0'});
     resumeButton.setInteractive();
     resumeButton.on('pointerdown', () => resume());
     platforms = this.physics.add.sprite(window.screen.width/2, window.screen.height-70, 'ground')
     platforms.displayWidth = window.screen.width
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#FFFFFF' });
-    livesText = this.add.text(600, 16, 'lives: 3', { fontSize: '32px', fill: '#FFFFFF' });
+    livesText = this.add.text(1750, 16, 'lives: 3', { fontSize: '32px', fill: '#FFFFFF' });
     gameOverText = this.add.text(180, 250, 'GAME OVER', {font: '80px bold', fill: '#FF0000'})
     gameOverText.visible = false;
     gameWonText = this.add.text(180, 250, 'GAME WON', {font: '80px bold', fill: '#FFD700'})
